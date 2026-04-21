@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container narrow-content">
+        <h1 class="mb-4">Notifications</h1>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                {% for item in notifications %}
+                <div class="mb-3 pb-3 border-bottom">
+                    <h2 class="h6 mb-1">{{ item.title }}</h2>
+                    <p class="mb-1">{{ item.message }}</p>
+                    <small class="text-muted">{{ item.created_at|date:"d M Y H:i" }}</small>
+                </div>
+                {% empty %}
+                <p class="mb-0 text-muted">You have no notifications.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

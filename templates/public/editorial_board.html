@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="mb-4">Editorial Board</h1>
+        <div class="row g-4">
+            {% for member in members %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        {% if member.profile_picture %}
+                        <img src="{{ member.profile_picture.url }}" class="card-img-top rounded-circle mx-auto mb-3" alt="{{ member.name }} profile picture" style="width: 100px; height: 100px; object-fit: cover;">
+                        {% endif %}
+                        <h5 class="text-center">{{ member.name }}</h5>
+                        <p class="text-primary fw-semibold text-center">{{ member.role }}</p>
+                        <p class="text-center">{{ member.bio|default:"Editorial profile coming soon." }}</p>
+                        {% if member.email %}<p class="text-center mb-0 small">{{ member.email }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12"><div class="alert alert-light border">Editorial board members can be added from the admin portal.</div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

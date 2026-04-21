@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% block title %}Verify Email - {{ SITE_SHORT_NAME }}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container narrow-content">
+        <div class="card border-0 shadow">
+            <div class="card-body text-center p-5">
+                <div class="mb-4">
+                    <i class="bi bi-envelope-check fa-3x text-primary mb-3"></i>
+                </div>
+                <h1 class="h3 mb-3">Check your email</h1>
+                <p class="lead text-muted mb-4">We've sent a verification link to {{ user.email }}.</p>
+                <p>Click the link in the email to activate your account. The link expires in 7 days.</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info mt-3">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="mt-4">
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Resend Email</button>
+                    </form>
+                    <a href="{% url 'unified-sign-in' %}" class="btn btn-link">Back to Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

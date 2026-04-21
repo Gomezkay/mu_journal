@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="mb-4">
+            <h1>{{ volume.name }}</h1>
+            <p class="text-muted">ISSN {{ volume.issn }} | Editor {{ volume.editor_name }} | {{ volume.publication_date|date:"d M Y" }}</p>
+            <p>{{ volume.description }}</p>
+        </div>
+        {% for issue in volume.issues.all %}
+        {% if issue.is_active %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h3>{{ issue.title }} <span class="text-muted">Issue {{ issue.number }}</span></h3>
+                <p>{{ issue.summary }}</p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Title</th><th>Authors</th><th>Category</th><th>PDF</th></tr></thead>
+                        <tbody>
+                            {% for article in issue.articles.all %}
+                            {% if article.is_active %}
+                            <tr>
+                                <td><a href="{% url 'article-detail' article.slug %}">{{ article.title }}</a></td>
+                                <td>{{ article.authors }}</td>
+                                <td>{{ article.get_category_display }}</td>
+                                <td>{% if article.pdf_link %}<a href="{{ article.pdf_link }}" target="_blank">Download/View</a>{% else %}<span class="text-muted">Unavailable</span>{% endif %}</td>
+                            </tr>
+                            {% endif %}
+                            {% empty %}
+                            <tr><td colspan="4">No content has been added to this issue yet.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

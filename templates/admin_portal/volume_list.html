@@ -1,0 +1,28 @@
+{% extends "admin_portal/base.html" %}
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 mb-0">Volumes</h2>
+    <div class="d-flex gap-2">
+        <a href="{% url 'volume-create' %}" class="btn btn-primary">Add Volume</a>
+        <a href="{% url 'issue-create' %}" class="btn btn-outline-primary">Add Issue</a>
+    </div>
+</div>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead><tr><th>Name</th><th>ISSN</th><th>Editor</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+                {% for volume in volumes %}
+                <tr>
+                    <td>{{ volume.name }}</td>
+                    <td>{{ volume.issn }}</td>
+                    <td>{{ volume.editor_name }}</td>
+                    <td>{{ volume.is_active|yesno:"Active,Inactive" }}</td>
+                    <td class="text-end"><a href="{% url 'volume-update' volume.pk %}" class="btn btn-sm btn-outline-primary">Edit</a> <a href="{% url 'volume-toggle' volume.pk %}" class="btn btn-sm btn-outline-secondary">Toggle</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

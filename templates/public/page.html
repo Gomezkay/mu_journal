@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+:root {
+    --mumj-primary: #04054f;
+    --mumj-secondary: #f4b400;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--mumj-primary);
+    color: #fff;
+}
+
+.icon {
+    color: var(--mumj-secondary);
+}
+
+.mumj-header {
+    color: var(--mumj-primary);
+    font-weight: bold;
+}
+</style>
+
+<section class="py-5">
+<div class="container narrow-content">
+
+<h1 class="mb-4 mumj-header">{{ title }}</h1>
+
+<!-- ===================== ABOUT ===================== -->
+{% if page_key == "about" %}
+<div class="accordion" id="aboutAccordion">
+
+<!-- Overview -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#a1">
+<i class="bi bi-info-circle me-2 icon"></i> About the Journal
+</button>
+</h2>
+<div id="a1" class="accordion-collapse collapse show">
+<div class="accordion-body">
+
+<strong>MULUNGUSHI MULTIDISCIPLINARY JOURNAL (MUMJ)</strong><br><br>
+
+The Mulungushi University Multidisciplinary Journal (MUMJ) is a bi annual journal whose focus is to pursue the frontiers of knowledge. It provides a platform for sharing and communicating research and development issues from within Zambia and globally.
+
+It aspires to inform policy direction, enhance national development and transform livelihoods. The journal provides opportunities for scholars and innovators to contribute knowledge to address global challenges.
+
+</div>
+</div>
+</div>
+
+<!-- Focus -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a2">
+<i class="bi bi-diagram-3 me-2 icon"></i> Focus Areas
+</button>
+</h2>
+<div id="a2" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+Agriculture, environment and natural resources; business law and HR; humanities and social sciences; science, engineering and ICT; technology; medicine and health sciences; education.
+
+</div>
+</div>
+</div>
+
+<!-- Vision -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a3">
+<i class="bi bi-eye me-2 icon"></i> Vision
+</button>
+</h2>
+<div id="a3" class="accordion-collapse collapse">
+<div class="accordion-body">
+“To be a high quality research publications journal of integrity for sharing outstanding knowledge for Africa and globally”.
+</div>
+</div>
+</div>
+
+<!-- Aims -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a4">
+<i class="bi bi-bullseye me-2 icon"></i> Aims
+</button>
+</h2>
+<div id="a4" class="accordion-collapse collapse">
+<div class="accordion-body">
+<ul>
+<li>Provide a platform for researchers, scholars, and practitioners.</li>
+<li>Promote integration of diverse perspectives to solve complex problems.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Scope -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a5">
+<i class="bi bi-globe me-2 icon"></i> Scope
+</button>
+</h2>
+<div id="a5" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+The journal welcomes interdisciplinary submissions across sciences, humanities, engineering and health sciences. Includes research articles, reviews and perspectives.
+
+</div>
+</div>
+</div>
+
+<!-- Open Access -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a6">
+<i class="bi bi-unlock me-2 icon"></i> Open Access & License
+</button>
+</h2>
+<div id="a6" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+• Free access to all articles<br>
+• Creative Commons Attribution License<br>
+• Authors retain copyright<br>
+• Encourages repository sharing
+
+</div>
+</div>
+</div>
+
+<!-- Ethics -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a7">
+<i class="bi bi-shield-check me-2 icon"></i> Publication Ethics
+</button>
+</h2>
+<div id="a7" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+Includes plagiarism, duplicate submission, citation manipulation, falsification, authorship, and conflicts of interest policies.
+
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ===================== GUIDELINES ===================== -->
+{% elif page_key == "guidelines" %}
+<div class="accordion" id="guidelinesAccordion">
+
+<!-- Checklist -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#g1">
+<i class="bi bi-check2-square me-2 icon"></i> Submission Checklist
+</button>
+</h2>
+<div id="g1" class="accordion-collapse collapse show">
+<div class="accordion-body">
+
+<ol>
+<li>Submission not published or under review elsewhere</li>
+<li>File in Word/RTF format</li>
+<li>References include URLs</li>
+<li>Correct formatting</li>
+<li>Follows guidelines</li>
+</ol>
+
+</div>
+</div>
+</div>
+
+<!-- Author Guidelines -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#g2">
+<i class="bi bi-person-lines-fill me-2 icon"></i> Author Guidelines
+</button>
+</h2>
+<div id="g2" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+Authors must follow guidelines strictly to ensure smooth review and publication.
+
+Registration is required to submit articles and track progress.
+
+</div>
+</div>
+</div>
+
+<!-- Structure -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#g3">
+<i class="bi bi-file-earmark-text me-2 icon"></i> Article Structure
+</button>
+</h2>
+<div id="g3" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+Title, Abstract (250 words), Keywords (10), Introduction, Body, Figures, Conclusion, References.
+
+</div>
+</div>
+</div>
+
+<!-- Layout -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#g4">
+<i class="bi bi-layout-text-window me-2 icon"></i> Layout
+</button>
+</h2>
+<div id="g4" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+A4, 12pt Bookman Old Style, 1.5 spacing, 5000–8000 words, UK English.
+
+</div>
+</div>
+</div>
+
+<!-- References -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#g5">
+<i class="bi bi-journal-text me-2 icon"></i> References
+</button>
+</h2>
+<div id="g5" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+Harvard referencing style required. All references must be accurate and complete.
+
+</div>
+</div>
+</div>
+
+<!-- Fees -->
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#g6">
+<i class="bi bi-cash-coin me-2 icon"></i> Processing Charges
+</button>
+</h2>
+<div id="g6" class="accordion-collapse collapse">
+<div class="accordion-body">
+
+K500 (Zambia)<br>
+$100 (Developing nations)<br>
+$150 (Developed nations)
+
+</div>
+</div>
+</div>
+
+</div>
+{% endif %}
+
+</div>
+</section>
+
+{% endblock %}

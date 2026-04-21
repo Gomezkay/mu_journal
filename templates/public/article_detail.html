@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container narrow-content">
+        <span class="badge bg-primary mb-3">{{ article.get_category_display }}</span>
+        <h1 class="mb-3">{{ article.title }}</h1>
+        <p class="text-muted">{{ article.authors }}</p>
+        <p>{{ article.volume.name }} | Issue {{ article.issue.number }} | {{ article.published_at|date:"d M Y" }}</p>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="h5">Abstract</h2>
+                <p class="mb-0">{{ article.abstract|default:"No abstract added yet." }}</p>
+            </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="h5">Citation</h2>
+                <p class="mb-2">{{ article.citation_text }}</p>
+                {% if article.doi %}<p class="mb-0"><strong>DOI:</strong> {{ article.doi }}</p>{% endif %}
+            </div>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            {% if article.pdf_link %}<a href="{{ article.pdf_link }}" class="btn btn-primary">Read PDF</a>{% endif %}
+            <a href="{% url 'volume-detail' article.volume.slug %}" class="btn btn-outline-primary">Back to Volume</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

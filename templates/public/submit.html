@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container narrow-content">
+        <h1 class="mb-4">{% if is_edit %}Edit Submission{% else %}Submit Paper{% endif %}</h1>
+        {% if article_id and not is_edit %}<div class="alert alert-success">Submission received. Keep this Article ID: <strong>{{ article_id }}</strong></div>{% endif %}
+        <form method="post" enctype="multipart/form-data" class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary">{% if is_edit %}Save Changes{% else %}Submit Manuscript{% endif %}</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

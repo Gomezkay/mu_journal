@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="admin-shell border-bottom">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+            <p class="eyebrow mb-2">Journal Operations</p>
+            <div class="d-flex align-items-center gap-3 mb-1">
+                <h1 class="h3 mb-0">Admin Portal</h1>
+                <span class="user-badge">{{ user.username }}</span>
+            </div>
+
+            <p class="mb-0 text-muted">Manage volumes, articles, submissions, and journal administrators from one structured workspace.</p>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="d-flex gap-2 flex-wrap admin-nav">
+            <a class="btn btn-outline-primary" href="{% url 'admin-dashboard' %}">Dashboard</a>
+            <a class="btn btn-outline-primary" href="{% url 'volume-list' %}">Volumes</a>
+            <a class="btn btn-outline-primary" href="{% url 'article-list' %}">Content</a>
+            <a class="btn btn-outline-primary" href="{% url 'submission-list' %}">Submissions</a>
+            <a class="btn btn-outline-primary" href="{% url 'admin-editorial-board-list' %}">Board</a>
+            {% if request.user.is_superuser or request.user.admin_profile.can_manage_admins %}
+            <a class="btn btn-outline-primary" href="{% url 'admin-user-list' %}">Admins</a>
+            {% endif %}
+            <a class="btn btn-danger" href="{% url 'admin-logout' %}">Logout</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<div class="container py-4 admin-content">
+    {% block admin_content %}{% endblock %}
+</div>
+{% endblock %}

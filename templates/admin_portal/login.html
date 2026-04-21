@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5 admin-auth-bg">
+    <div class="container narrow-content">
+        <div class="card border-0 shadow-lg">
+            <div class="card-body p-4 p-lg-5">
+                <h1 class="mb-4">Admin Login</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary w-100">Login</button>
+                </form>
+                <div class="mt-3 d-flex justify-content-between">
+                    <a href="{% url 'admin-register' %}">Register</a>
+                    <a href="{% url 'admin-forgot-password' %}">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

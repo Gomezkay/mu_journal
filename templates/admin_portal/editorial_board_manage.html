@@ -1,0 +1,34 @@
+{% extends "admin_portal/base.html" %}
+{% block admin_content %}
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Add Board Member</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary">Save Member</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Current Board Members</h2>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+                        <tbody>
+                            {% for member in members %}
+                            <tr><td>{{ member.name }}</td><td>{{ member.role }}</td><td>{{ member.is_active|yesno:"Active,Inactive" }}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

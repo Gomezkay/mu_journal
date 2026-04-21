@@ -1,0 +1,25 @@
+{% extends "admin_portal/base.html" %}
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 mb-0">Volume Content</h2>
+    <a href="{% url 'article-create' %}" class="btn btn-primary">Add Content</a>
+</div>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead><tr><th>Title</th><th>Volume</th><th>Issue</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+                {% for article in articles %}
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.volume.name }}</td>
+                    <td>{{ article.issue.number }}</td>
+                    <td>{{ article.is_active|yesno:"Active,Inactive" }}</td>
+                    <td class="text-end"><a href="{% url 'article-update' article.pk %}" class="btn btn-sm btn-outline-primary">Edit</a> <a href="{% url 'article-toggle' article.pk %}" class="btn btn-sm btn-outline-secondary">Toggle</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

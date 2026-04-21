@@ -1,0 +1,28 @@
+{% extends "admin_portal/base.html" %}
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h2 class="h4 mb-0">Submissions</h2>
+    <div class="d-flex gap-2">
+        <a href="{% url 'export-submissions-csv' %}" class="btn btn-outline-primary">Export CSV</a>
+        <a href="{% url 'export-submissions-excel' %}" class="btn btn-outline-primary">Export Excel</a>
+    </div>
+</div>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead><tr><th>ID</th><th>Author</th><th>Title</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+                {% for submission in submissions %}
+                <tr>
+                    <td>{{ submission.article_id }}</td>
+                    <td>{{ submission.full_name }}</td>
+                    <td>{{ submission.title }}</td>
+                    <td>{{ submission.get_status_display }}</td>
+                    <td class="text-end"><a href="{% url 'submission-review' submission.pk %}" class="btn btn-sm btn-outline-primary">Review</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

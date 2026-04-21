@@ -1,0 +1,70 @@
+{% extends "admin_portal/base.html" %}
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Admin Dashboard</h1>
+    <span class="user-badge">{{ user.username }}</span>
+</div>
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3"><div class="card stat-card border-0 shadow-sm"><div class="card-body"><p class="text-muted mb-1">Volumes</p><h2>{{ volume_count }}</h2></div></div></div>
+    <div class="col-md-3"><div class="card stat-card border-0 shadow-sm"><div class="card-body"><p class="text-muted mb-1">Articles</p><h2>{{ article_count }}</h2></div></div></div>
+    <div class="col-md-3"><div class="card stat-card border-0 shadow-sm"><div class="card-body"><p class="text-muted mb-1">Pending Submissions</p><h2>{{ pending_submissions }}</h2></div></div></div>
+    <div class="col-md-3"><div class="card stat-card border-0 shadow-sm"><div class="card-body"><p class="text-muted mb-1">Active Admins</p><h2>{{ active_admins }}</h2></div></div></div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h4 class="mb-3">Recent Submissions</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>ID</th><th>Title</th><th>Status</th></tr></thead>
+                        <tbody>
+                            {% for item in recent_submissions %}
+                            <tr><td>{{ item.article_id }}</td><td>{{ item.title }}</td><td>{{ item.get_status_display }}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h4 class="mb-3">Article Category Analytics</h4>
+                {% for item in category_breakdown %}
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between"><span>{{ item.category }}</span><span>{{ item.total }}</span></div>
+                    <div class="progress"><div class="progress-bar" style="width: {{ item.total|add:item.total }}0%"></div></div>
+                </div>
+                {% empty %}
+                <p class="mb-0 text-muted">Add articles to populate analytics.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-0 shadow-sm mt-4">
+    <div class="card-body">
+        <h4 class="mb-3">Recent Audit Activity</h4>
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead><tr><th>Action</th><th>Object</th><th>User</th><th>Time</th></tr></thead>
+                <tbody>
+                    {% for item in audit_logs %}
+                    <tr>
+                        <td>{{ item.action }}</td>
+                        <td>{{ item.object_type }} {{ item.object_id }}</td>
+                        <td>{{ item.user|default:"System" }}</td>
+                        <td>{{ item.created_at|date:"d M Y H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No audit activity yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

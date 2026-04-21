@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Reviewer Dashboard</h1>
+            <span class="user-badge">{{ user.username }}</span>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead><tr><th>Submission</th><th>Status</th><th>Due Date</th><th></th></tr></thead>
+                    <tbody>
+                        {% for assignment in assignments %}
+                        <tr>
+                            <td>{{ assignment.submission.article_id }} - {{ assignment.submission.title }}</td>
+                            <td>{{ assignment.get_status_display }}</td>
+                            <td>{{ assignment.due_date|default:"Not set" }}</td>
+                            <td class="text-end"><a href="{% url 'reviewer-assignment-detail' assignment.pk %}" class="btn btn-sm btn-outline-primary">Open</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4">No assignments yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

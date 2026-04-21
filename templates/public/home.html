@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ SITE_SHORT_NAME }} | Home{% endblock %}
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-end g-5 hero-grid">
+            <div class="col-xl-7">
+                <div class="hero-copy">
+                    <!-- <p class="hero-kicker">Mulungushi University Journal</p> -->
+                    <img src="{% static 'images/mu_logo.png' %}" width="172" height="172" alt="Mulungushi University crest" class="hero-seal">
+                    <h3 class="hero-title">Mulungushi University Multidisciplinary Journal</h3>
+                    <p class="hero-lead">Publish multidisciplinary scholarship, discover university-led research, and keep every submission step visible from intake to final decision.</p>
+                    <div class="hero-actions">
+                        <a href="{% url 'submit-paper' %}" class="btn btn-primary btn-lg">Submit Paper</a>
+                        <a href="{% url 'track-submission' %}" class="btn btn-outline-light btn-lg">Track Status</a>
+                    </div>
+                    <div class="hero-metrics" aria-label="Platform highlights">
+                        <div>
+                            <span class="hero-metric-value">{{ volumes|length }}</span>
+                            <span class="hero-metric-label">Published Volumes</span>
+                        </div>
+                        <div>
+                            <span class="hero-metric-value">{{ latest_articles|length }}</span>
+                            <span class="hero-metric-label">Recent Articles</span>
+                        </div>
+                        <div>
+                            <span class="hero-metric-value">24/7</span>
+                            <span class="hero-metric-label">Submission Access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5">
+                <div class="hero-search-panel">
+                    <div class="hero-search-heading">
+                        <p class="eyebrow mb-2">Archive Search</p>
+                        <h2 class="h3 mb-2">Find Volumes, Titles, and Authors Fast</h2>
+                        <p class="mb-0 text-muted">Filter the archive by keyword, publication year, or sort order.</p>
+                    </div>
+                    <form method="get" class="row g-3" aria-label="Archive search">
+                        <div class="col-12">
+                            <label for="archive-query" class="form-label">Search the archive</label>
+                            <input id="archive-query" type="text" name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search volume, title, author&hellip;" autocomplete="off">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="archive-sort" class="form-label">Sort by</label>
+                            <select id="archive-sort" name="sort" class="form-select">
+                                <option value="latest">Latest</option>
+                                <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest</option>
+                                <option value="title" {% if request.GET.sort == 'title' %}selected{% endif %}>Title</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="archive-year" class="form-label">Publication year</label>
+                            <select id="archive-year" name="year" class="form-select">
+                                <option value="">All Years</option>
+                                {% for item in years %}
+                                <option value="{{ item.year }}" {% if request.GET.year == item.year|stringformat:"s" %}selected{% endif %}>{{ item.year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-12 d-grid">
+                            <button class="btn btn-primary btn-lg">Search Archives</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="signal-band">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-4">
+                <p class="eyebrow">Why It Works</p>
+                <h2 class="section-title text-white mb-3">Designed for the full journal workflow.</h2>
+            </div>
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="signal-item">
+                            <h3>Discover</h3>
+                            <p>Browse curated issues, searchable article listings, and citation-ready research records.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="signal-item">
+                            <h3>Submit</h3>
+                            <p>Give authors a direct path to upload manuscripts and follow progress without confusion.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="signal-item">
+                            <h3>Manage</h3>
+                            <p>Support editors and administrators with cleaner review operations and clearer status tracking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 archive-section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <p class="eyebrow mb-2">Published Archive</p>
+                <h2 class="section-title mb-0">Browse Recent Volumes</h2>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <a href="{% url 'rss-feed' %}" class="btn btn-outline-primary d-flex align-items-center gap-2">
+                    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="rss-icon">
+                        <path d="M19.199,3h-14.398c-3.711,0-6.732,3.019-6.732,6.732v14.398c0,3.713,3.021,6.734,6.732,6.734h14.398c3.711,0,6.732-3.021,6.732-6.734V9.732C25.931,6.019,22.91,3,19.199,3z M24,15.001c0-4.417-3.582-8-8-8c-4.418,0-8,3.583-8,8v8h4v-8c0-3.309,2.691-6,6-6c3.308,0,6,2.691,6,6v8H24z M12,24c-2.209,0-4.182-0.907-5.604-2.354c1.409-1.447,3.395-2.354,5.604-2.354s4.195,0.907,5.604,2.354C16.182,23.093,14.209,24,12,24z"/>
+                    </svg>
+                    RSS Feed
+                </a>
+                <span class="text-muted small">Get new articles automatically</span>
+            </div>
+        </div>
+        <div class="archive-grid">
+            {% for volume in volumes %}
+            <article class="archive-item">
+                {% if volume.thumbnail %}<img src="{{ volume.thumbnail.url }}" class="volume-thumb" alt="{{ volume.name }}" loading="lazy">{% endif %}
+                <div class="archive-body">
+                    <p class="archive-meta">ISSN {{ volume.issn }}</p>
+                    <h3>{{ volume.name }}</h3>
+                    <p class="mb-2">Editor: {{ volume.editor_name }}</p>
+                    <p class="small text-secondary">{{ volume.publication_date|date:"d M Y" }}</p>
+                    <a href="{{ volume.get_absolute_url }}" class="btn btn-primary">Open Volume</a>
+                </div>
+            </article>
+            {% empty %}
+            <div class="col-12"><div class="alert alert-light border">No volumes match your search yet.</div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="py-5 article-section">
+    <div class="container">
+        <div class="section-header align-items-end">
+            <div>
+                <p class="eyebrow mb-2">Latest Publishing</p>
+                <h2 class="section-title mb-0">New Articles Across the Journal</h2>
+            </div>
+            <p class="section-copy mb-0">Short, scannable entries keep the reading experience fast while preserving the citation details researchers need.</p>
+        </div>
+        <div class="article-list">
+            {% for article in latest_articles %}
+            <article class="article-item">
+                <div class="article-item-main">
+                    <span class="article-badge">{{ article.get_category_display }}</span>
+                    <h3>{{ article.title }}</h3>
+                    <p class="article-authors">{{ article.authors }}</p>
+                    <p class="article-meta">{{ article.volume.name }} | Issue {{ article.issue.number }}</p>
+                    <p class="article-citation mb-0">{{ article.citation_text }}</p>
+                </div>
+                <div class="article-item-actions">
+                    <a href="{% url 'article-detail' article.slug %}" class="btn btn-primary">Details</a>
+                    {% if article.pdf_link %}<a href="{{ article.pdf_link }}" class="btn btn-outline-primary">View PDF</a>{% endif %}
+                </div>
+            </article>
+            {% empty %}
+            <div class="alert alert-light border mb-0">
+                <div class="d-flex align-items-center gap-2">
+                    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="text-warning">
+                        <path d="M13 3a9 9 0 1 1-2 18v-4H8v4a11 11 0 0 0 6-10V3z"/>
+                    </svg>
+                    No published articles yet. Submit your paper to get started!
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5 editorial-section bg-light">
+    <div class="container">
+        <div class="section-header mb-5">
+            <div>
+                <p class="eyebrow mb-2">Our Team</p>
+                <h2 class="section-title mb-0">Editorial Board</h2>
+            </div>
+            <p class="section-copy mb-0">Meet the academic leadership guiding the journal.</p>
+        </div>
+        <div class="row g-4">
+            {% for member in editorial_members %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        {% if member.profile_picture %}
+                        <img src="{{ member.profile_picture.url }}" class="card-img-top rounded-circle mx-auto mb-3" alt="{{ member.name }} profile picture" style="width: 120px; height: 120px; object-fit: cover;">
+                        {% endif %}
+                        <h5 class="text-center">{{ member.name }}</h5>
+                        <p class="text-primary fw-semibold text-center">{{ member.role }}</p>
+                        {% if member.bio %}<p class="text-center small text-secondary">{{ member.bio|truncatechars:120 }}</p>{% endif %}
+                        {% if member.email %}<p class="text-center mb-0 small">{{ member.email }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-light border text-center py-5">
+                    <p class="mb-0">Editorial board members will be listed here once added.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if editorial_members %}
+        <div class="text-center mt-5">
+            <a href="{% url 'editorial-board' %}" class="btn btn-outline-primary">View Full Editorial Board</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

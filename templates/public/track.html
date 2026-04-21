@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5">
+    <div class="container narrow-content">
+        <h1 class="mb-4">Track Submission</h1>
+        <form method="get" class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+                {{ form.as_p }}
+                <button class="btn btn-primary">Check Status</button>
+            </div>
+        </form>
+        {% if submission %}
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h4>{{ submission.title }}</h4>
+                <p><strong>Article ID:</strong> {{ submission.article_id }}</p>
+                <p><strong>Status:</strong> <span class="badge bg-secondary">{{ submission.get_status_display }}</span></p>
+                <p><strong>Author:</strong> {{ submission.full_name }}</p>
+                {% if submission.reviewer_notes %}<p><strong>Reviewer Notes:</strong> {{ submission.reviewer_notes }}</p>{% endif %}
+                {% if submission.rejection_reason %}<p><strong>Reason:</strong> {{ submission.rejection_reason }}</p>{% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
