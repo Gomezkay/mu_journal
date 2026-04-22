@@ -20,6 +20,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -101,3 +102,5 @@ SITE_SHORT_NAME = "MUMJ"
 SITE_EMAIL = "journals@mu.ac.zm"
 SITE_PHONE = "+260 211 000 000"
 SITE_ADDRESS = "Mulungushi University, Great North Road Campus, Kabwe, Zambia"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
